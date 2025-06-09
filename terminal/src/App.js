@@ -19,6 +19,18 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
+  const displayError = (message) => {
+    setOutput(prev => [...prev, `Error: ${message}`]);
+  };
+
+  const displaySuccess = (message) => {
+    setOutput(prev => [...prev, `Success: ${message}`]);
+  };
+
+  const findTaskByIdOrTitle = (identifier) => {
+    return tasks.find(task => task.id === identifier || task.title.toLowerCase() === identifier.toLowerCase());
+  };
+
   const handleCommand = (command) => {
     const args = command.trim().split(' ');
     const cmd = args[0].toLowerCase();
@@ -29,7 +41,10 @@ function App() {
           'Available commands:',
           'add-task <title> <due-date> - Add a new task',
           'list-tasks - Show all tasks',
-          'complete-task <id> - Mark a task as completed',
+          'update-task <id/title> <new-title/new-date> - Update task title or due date',
+          'delete-task <id/title> - Delete a task',
+          'search-tasks <title/date> - Search tasks by title or date',
+          'complete-task <id/title> - Mark a task as completed',
           'help - Show this help message',
           'clear - Clear the terminal'
         ]);
@@ -37,7 +52,7 @@ function App() {
 
       case 'add-task':
         if (args.length < 3) {
-          setOutput(prev => [...prev, 'Error: Please provide task title and due date']);
+          displayError('Please provide task title and due date');
           return;
         }
         const title = args.slice(1, -1).join(' ');
@@ -49,7 +64,7 @@ function App() {
           status: 'pending'
         };
         setTasks(prev => [...prev, newTask]);
-        setOutput(prev => [...prev, `Task added: ${title} (Due: ${dueDate})`]);
+        displaySuccess(`Task added: ${title} (Due: ${dueDate})`);
         break;
 
       case 'list-tasks':
@@ -63,16 +78,88 @@ function App() {
         }
         break;
 
-      case 'complete-task':
-        if (args.length < 2) {
-          setOutput(prev => [...prev, 'Error: Please provide task ID']);
+      case 'update-task':
+        if (args.length < 3) {
+          displayError('Please provide task identifier (ID/title) and new value');
           return;
         }
-        const taskId = args[1];
+        const taskIdentifier = args[1];
+        const newValue = args.slice(2).join(' ');
+        const taskToUpdate = findTaskByIdOrTitle(taskIdentifier);
+        
+        if (!taskToUpdate) {
+          displayError('Task not found');
+          return;
+        }
+
+        setTasks(prev => prev.map(task => {
+          if (task.id === taskToUpdate.id) {
+            // Check if the new value is a date (simple validation)
+            const isDate = /^\d{4}-\d{2}-\d{2}$/.test(newValue);
+            return {
+              ...task,
+              title: isDate ? task.title : newValue,
+              dueDate: isDate ? newValue : task.dueDate
+            };
+          }
+          return task;
+        }));
+        displaySuccess(`Task updated successfully`);
+        break;
+
+      case 'delete-task':
+        if (args.length < 2) {
+          displayError('Please provide task ID or title');
+          return;
+        }
+        const taskToDelete = findTaskByIdOrTitle(args[1]);
+        
+        if (!taskToDelete) {
+          displayError('Task not found');
+          return;
+        }
+
+        setTasks(prev => prev.filter(task => task.id !== taskToDelete.id));
+        displaySuccess(`Task "${taskToDelete.title}" deleted successfully`);
+        break;
+
+      case 'search-tasks':
+        if (args.length < 2) {
+          displayError('Please provide search term (title or date)');
+          return;
+        }
+        const searchTerm = args.slice(1).join(' ').toLowerCase();
+        const matchingTasks = tasks.filter(task => 
+          task.title.toLowerCase().includes(searchTerm) || 
+          task.dueDate.includes(searchTerm)
+        );
+
+        if (matchingTasks.length === 0) {
+          setOutput(prev => [...prev, 'No matching tasks found.']);
+        } else {
+          const taskList = matchingTasks.map(task => 
+            `[${task.id}] ${task.title} - Due: ${task.dueDate} - Status: ${task.status}`
+          );
+          setOutput(prev => [...prev, 'Matching tasks:', ...taskList]);
+        }
+        break;
+
+      case 'complete-task':
+        if (args.length < 2) {
+          displayError('Please provide task ID or title');
+          return;
+        }
+        const taskToComplete = findTaskByIdOrTitle(args[1]);
+        
+        if (!taskToComplete) {
+          displayError('Task not found');
+          return;
+        }
+
         setTasks(prev => prev.map(task => 
-          task.id === taskId ? { ...task, status: 'completed' } : task
+          task.id === taskToComplete.id ? { ...task, status: 'completed' } : task
         ));
-        setOutput(prev => [...prev, `Task ${taskId} marked as completed`]);
+        displaySuccess(`Task "${taskToComplete.title}" marked as completed`);
         break;
 
       case 'clear':
@@ -80,7 +167,7 @@ function App() {
         break;
 
       default:
-        setOutput(prev => [...prev, `Unknown command: ${cmd}. Type "help" for available commands.`]);
+        displayError(`Unknown command: ${cmd}. Type "help" for available commands.`);
     }
   };
 
