@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling Text with Class Selectors</title>
+    <style>
+        /* Default paragraph styling */
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Highlight class styling */
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+            border: 2px solid #ffcc00;
+        }
+
+        /* Note class styling */
+        .note {
+            font-style: italic;
+            color: darkgreen;
+            background-color: #f0f8f0;
+            border-left: 4px solid darkgreen;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Class Selectors Demo</h1>
+    
+    <p class="highlight">
+        This is the first paragraph with the 'highlight' class. It has a yellow background color and bold text to make it stand out from the other paragraphs.
+    </p>
+    
+    <p class="note">
+        This is the second paragraph with the 'note' class. It has italic text and dark green color to indicate important information that should be noted.
+    </p>
+    
+    <p>
+        This is the third paragraph without any class. It will use the default paragraph styling with a font size of 16px as defined in the CSS.
+    </p>
+</body>
+</html> 
