@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.attendance-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.filter-section {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-section label {
+  font-weight: 600;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.filter-dropdown {
+  padding: 8px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.total-section {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+}
+
+.total-section h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.students-section {
+  margin-top: 20px;
+}
+
+.students-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.student-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border-left: 4px solid;
+}
+
+.student-item.present {
+  background: #d4edda;
+  border-left-color: #28a745;
+  color: #155724;
+}
+
+.student-item.absent {
+  background: #f8d7da;
+  border-left-color: #dc3545;
+  color: #721c24;
+}
+
+.student-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.student-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex: 1;
+  text-align: left;
+}
+
+.attendance-status {
+  font-weight: 500;
+  margin: 0 20px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  min-width: 80px;
+  text-align: center;
+}
+
+.student-item.present .attendance-status {
+  background: #28a745;
+  color: white;
+}
+
+.student-item.absent .attendance-status {
+  background: #dc3545;
+  color: white;
+}
+
+.toggle-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  min-width: 80px;
+}
+
+.toggle-btn:hover {
+  background: #5a6fd8;
+  transform: scale(1.05);
+}
+
+.toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.empty-message {
+  color: #666;
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 20px 0;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .attendance-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .student-item {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .student-name {
+    text-align: center;
+  }
+  
+  .filter-section {
+    flex-direction: column;
+    gap: 5px;
+  }
+} 
