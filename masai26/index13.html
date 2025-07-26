@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Image Gallery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+        }
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-5px);
+        }
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+        .image-title {
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nature Photography Gallery</h1>
+    
+    <div class="gallery">
+        <section>
+            <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b" 
+                 alt="Scenic mountain landscape with pine trees and lake"
+                 width="300">
+            <div class="image-title">Mountain Landscape</div>
+            <a href="https://en.wikipedia.org/wiki/Landscape_photography" 
+               target="_blank" 
+               rel="noopener noreferrer">
+               Learn about Landscape Photography
+            </a>
+        </section>
+        
+        <section>
+            <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda" 
+                 alt="Close-up of a hummingbird hovering near flowers"
+                 width="300">
+            <div class="image-title">Wildlife Photography</div>
+            <a href="https://en.wikipedia.org/wiki/Wildlife_photography" 
+               target="_blank" 
+               rel="noopener noreferrer">
+               Explore Wildlife Photography
+            </a>
+        </section>
+        
+        <section>
+            <img src="https://images.unsplash.com/photo-1511497584788-876760111969" 
+                 alt="Beautiful sunset over ocean waves"
+                 width="300">
+            <div class="image-title">Ocean Sunset</div>
+            <a href="https://en.wikipedia.org/wiki/Nature_photography" 
+               target="_blank" 
+               rel="noopener noreferrer">
+               Discover Nature Photography
+            </a>
+        </section>
+    </div>
+</body>
+</html>
