@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Navigation Exercise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="main-title">DOM Navigation Practice</h1>
+    
+    <p>First paragraph element</p>
+    <p>Second paragraph element</p>
+    <p>Third paragraph element</p>
+    
+    <div class="container">
+        <p>Paragraph inside container div</p>
+    </div>
+
+    <script>
+       
+        
+       
+        document.getElementById('main-title').textContent = "Welcome to the DOM World!";
+        
+         
+        const paragraphs = document.getElementsByTagName('p');
+        for (let p of paragraphs) {
+            p.style.color = 'blue';
+        }
+         
+        document.querySelector('.container').style.backgroundColor = 'yellow';
+        
+        console.log("DOM manipulation completed successfully!");
+    </script>
+</body>
+</html>

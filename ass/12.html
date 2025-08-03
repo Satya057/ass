@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM List Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            margin: 4px 0;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>List Items</h1>
+    <ul id="itemList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <button id="addButton">Add Item</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('addButton');
+            const list = document.querySelector('#itemList');
+            let itemCount = 3; // Starting count after initial 3 items
+
+            button.addEventListener('click', function() {
+                itemCount++;
+                const newItem = document.createElement('li');
+                newItem.textContent = `New Item ${itemCount}`;
+                
+                // Style based on sequence number (odd/even)
+                if (itemCount % 2 === 1) {
+                    // Odd sequence - bold and blue
+                    newItem.style.fontWeight = 'bold';
+                    newItem.style.color = 'blue';
+                } else {
+                    // Even sequence - italic and red
+                    newItem.style.fontStyle = 'italic';
+                    newItem.style.color = 'red';
+                }
+                
+                list.appendChild(newItem);
+            });
+        });
+    </script>
+</body>
+</html>

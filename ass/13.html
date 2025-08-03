@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #changeBgBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #updateTextBtn {
+            background-color: #2196F3;
+            color: white;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        #contentDiv {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive DOM Manipulation</h1>
+    
+    <div class="input-group">
+        <label for="colorInput">Enter a color name:</label>
+        <input type="text" id="colorInput" placeholder="e.g. red, blue, #ff0000">
+        <button id="changeBgBtn">Change Background</button>
+    </div>
+    
+    <div class="input-group">
+        <label for="textInput">Enter new text content:</label>
+        <input type="text" id="textInput" placeholder="Type your text here">
+        <button id="updateTextBtn">Update Text</button>
+    </div>
+    
+    <div id="contentDiv">
+        Initial content. This will change based on your input.
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const colorInput = document.getElementById('colorInput');
+            const textInput = document.getElementById('textInput');
+            const changeBgBtn = document.getElementById('changeBgBtn');
+            const updateTextBtn = document.getElementById('updateTextBtn');
+            const contentDiv = document.getElementById('contentDiv');
+
+            // Function to validate color
+            function isValidColor(color) {
+                // Create a temporary element to test the color
+                const s = new Option().style;
+                s.color = color;
+                return s.color !== '';
+            }
+
+            // Change background color event
+            changeBgBtn.addEventListener('click', function() {
+                const color = colorInput.value.trim();
+                
+                if (!color) {
+                    alert('Please enter a color name!');
+                    return;
+                }
+                
+                if (isValidColor(color)) {
+                    contentDiv.style.backgroundColor = color;
+                } else {
+                    alert('Invalid color name!');
+                }
+            });
+
+            // Update text content event
+            updateTextBtn.addEventListener('click', function() {
+                const newText = textInput.value.trim();
+                
+                if (!newText) {
+                    alert('Please enter some text!');
+                    return;
+                }
+                
+                contentDiv.textContent = newText;
+            });
+        });
+    </script>
+</body>
+</html>
